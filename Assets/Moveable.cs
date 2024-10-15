@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]       //We will still need to tweak some of the settings.
 public class Moveable : MonoBehaviour
 {
+    public Camera camera;
     Rigidbody2D rb2d;
     public float moveSpeed = 5f;
     public float sprintModifer = 1.5f;
@@ -12,6 +13,7 @@ public class Moveable : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        camera.fieldOfView = 164;
     }
 
     void Update()
@@ -27,10 +29,15 @@ public class Moveable : MonoBehaviour
         if(sprinting() == true)
         {
             rb2d.velocity = moveDirection * moveSpeed * sprintModifer;
+            camera.fieldOfView = 167;
         }
         else
         {
             rb2d.velocity = moveDirection * moveSpeed;
+        }
+        if(Input.GetJoystickNames().Length > 0)
+        {
+            
         }
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePosition - transform.position;
