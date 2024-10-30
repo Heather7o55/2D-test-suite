@@ -8,7 +8,7 @@ public class Moveable : MonoBehaviour
     public Camera camera;
     Rigidbody2D rb2d;
     public float moveSpeed = 5f;
-    public float sprintModifer = 1.5f;
+    public float sprintModifer = 2.5f;
 
     void Start()
     {
@@ -33,16 +33,22 @@ public class Moveable : MonoBehaviour
         }
         else
         {
+            camera.fieldOfView = 164;
             rb2d.velocity = moveDirection * moveSpeed;
         }
         if(Input.GetJoystickNames().Length > 0)
         {
             
         }
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = mousePosition - transform.position;
-        float angle = Vector2.SignedAngle(Vector2.right, direction);
-        rb2d.MoveRotation(angle);
+        if(Input.GetKey(KeyCode.LeftControl) == false)
+        {
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition = camera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 10));
+            Vector2 direction = mousePosition - transform.position;
+            float angle = Vector2.SignedAngle(Vector2.right, direction);
+            rb2d.MoveRotation(angle);
+        }
+        
     }
     static bool sprinting()
     {

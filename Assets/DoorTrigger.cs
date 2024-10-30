@@ -14,7 +14,7 @@ public class DoorTrigger : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.CompareTag("Player"))
+        if(collider.CompareTag("Player") || collider.CompareTag("puzzlebox"))
         {
             ChangeColor(new Color (0.5f, 0, 0, 1));
             hiddenDoor.SetActive(false);
@@ -23,7 +23,7 @@ public class DoorTrigger : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collider)
     {
-        if(collider.CompareTag("Player"))
+        if(collider.CompareTag("Player") || collider.CompareTag("puzzlebox"))
         {
             ChangeColor(new Color (1, 0, 0, 1));
             hiddenDoor.SetActive(true);
