@@ -19,7 +19,7 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.LeftControl))
+        if(Input.GetKey(KeyCode.Z))
         {
             followTarget = mousefollow.transform;
         }

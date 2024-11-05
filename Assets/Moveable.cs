@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 [RequireComponent(typeof(Rigidbody2D))]         //Tell Unity to add theses components to the gameobject this code is attached to.
 [RequireComponent(typeof(BoxCollider2D))]       //We will still need to tweak some of the settings.
 public class Moveable : MonoBehaviour
 {
+    float coolDown = 0.4f;
+    
+    public float slidespeed = 500f;
+    public bool is_sliding = false;
     public Camera camera;
     Rigidbody2D rb2d;
     public float moveSpeed = 5f;
@@ -25,13 +31,24 @@ public class Moveable : MonoBehaviour
         Vector2 moveDirection = new Vector2(moveInputX, moveInputY);
         moveDirection.Normalize();
 
+        
         // Assign velocity directly to the Rigidbody
+        if(sliding() == true &&  is_sliding == false)
+            {
+                
+                slide();
+                camera.fieldOfView = 162;
+            }
         if(sprinting() == true)
         {
-            rb2d.velocity = moveDirection * moveSpeed * sprintModifer;
-            camera.fieldOfView = 167;
+            if(is_sliding == false)
+            {
+                rb2d.velocity = moveDirection * moveSpeed * sprintModifer;
+                camera.fieldOfView = 167;
+            }
+            
         }
-        else
+        else if(is_sliding == false)
         {
             camera.fieldOfView = 164;
             rb2d.velocity = moveDirection * moveSpeed;
@@ -60,5 +77,49 @@ public class Moveable : MonoBehaviour
         {
             return false;
         }
+    }
+    
+    static bool sliding()
+    {
+        if(Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    private void slide()
+    {
+        is_sliding = true;
+        if(Input.GetAxisRaw("Horizontal") > 0)
+        {
+            rb2d.AddForce(Vector2.right * slidespeed);
+        }
+        if(Input.GetAxisRaw("Horizontal") < 0)
+        {
+            rb2d.AddForce(Vector2.left * slidespeed);
+        }
+        if(Input.GetAxisRaw("Vertical") > 0)
+        {
+            rb2d.AddForce(Vector2.up * slidespeed);
+        }
+        if(Input.GetAxisRaw("Vertical") < 0)
+        {
+            rb2d.AddForce(Vector2.down * slidespeed);
+        }
+        StartCoroutine("stopSlide");
+    }
+    IEnumerator stopSlide()
+    {
+        yield return new WaitForSeconds(coolDown);
+        is_sliding = false;
+    }
+    IEnumerator startCooldown()
+    {
+        Debug.Log("cooldown on");
+        yield return new WaitForSeconds(1f + coolDown);
+        is_sliding = false;
     }
 }
