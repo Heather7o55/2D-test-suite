@@ -1,11 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Targetbutton : MonoBehaviour
+public class button : MonoBehaviour
 {
     // Start is called before the first frame update
     public float timealloted = 5;
+    public string[] tags;
     float sec;
     public GameObject hiddenDoor;
     private Renderer[] renderers;
@@ -33,9 +35,12 @@ public class Targetbutton : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.CompareTag("Player") || collider.CompareTag("bullet"))
+        for(int i = 0; i < tags.Length; i++)
         {
-            sec = 0;
+            if(collider.CompareTag(tags[i]))
+            {
+                sec = 0;
+            }
         }
     }
 

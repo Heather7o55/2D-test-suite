@@ -5,19 +5,20 @@ using UnityEngine;
 public class DoorTrigger : MonoBehaviour
 {
     public GameObject hiddenDoor;
-    private Renderer[] renderers;
+    [SerializeField] private Animator anim1 = null;
+    [SerializeField] private Animator anim2 = null;
 
     void Start()
     {
-        renderers = GetComponentsInChildren<Renderer>();
-        ChangeColor(new Color (1, 0, 0, 1));
+        
     }
     void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.CompareTag("Player") || collider.CompareTag("puzzlebox"))
         {
-            ChangeColor(new Color (0.5f, 0, 0, 1));
-            hiddenDoor.SetActive(false);
+
+            anim1.Play("dooropen");
+            anim2.Play("dooropen1");
         }
     }
 
@@ -25,8 +26,8 @@ public class DoorTrigger : MonoBehaviour
     {
         if(collider.CompareTag("Player") || collider.CompareTag("puzzlebox"))
         {
-            ChangeColor(new Color (1, 0, 0, 1));
-            hiddenDoor.SetActive(true);
+            anim1.Play("doorclose");
+            anim2.Play("doorclose1");
         }
     }
     public void ChangeColor(Color color)

@@ -12,36 +12,49 @@ public class PlayerMovement : MonoBehaviour
     public float slidespeed = 500f;
     public bool isSliding = false;
     public Camera camera;
+    private int camerafov = 164;
     Rigidbody2D rb2d;
-    public float moveSpeed = 5f;
-    public float sprintModifer = 2.5f;
+    public float moveSpeed = 10f;
+    public float sprintModifer = 1.5f;
+    private SpriteRenderer sprite;
+    public Sprite[] sprites;
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        camera.fieldOfView = 164;
+        camera.fieldOfView = camerafov;
+        sprite = gameObject.GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
+        
         Vector2 moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         moveDirection.Normalize();
         // Assign velocity directly to the Rigidbody
+        if(isSliding == true)
+        {
+            ZoomCamera(160, 35);
+            sprite.sprite = sprites[1];
+        }
         if(sliding() == true && isSliding == false && isCooldown == false)
         {
             slide();
-            camera.fieldOfView = 162;
+            
         }
         else if(sprinting() == true && isSliding == false)
         {
             
             rb2d.velocity = moveDirection * moveSpeed * sprintModifer;
-            camera.fieldOfView = 167;
+            ZoomCamera(165, 15);
+            sprite.sprite = sprites[0];
         }
         else if(isSliding == false)
         {
-            camera.fieldOfView = 164;
+            
+            ZoomCamera(164, 15);
             rb2d.velocity = moveDirection * moveSpeed;
+            sprite.sprite = sprites[0];
         }
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = camera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 10));
@@ -91,5 +104,9 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("cooldown on");
         yield return new WaitForSeconds(coolDown);
         isCooldown = false;
+    }
+    void ZoomCamera(float target, float zoomSpeed)
+    {
+        camera.fieldOfView = Mathf.MoveTowards(camera.fieldOfView, target, zoomSpeed * Time.deltaTime);
     }
 }
