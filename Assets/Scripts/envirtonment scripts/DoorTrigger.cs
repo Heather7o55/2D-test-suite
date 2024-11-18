@@ -7,7 +7,6 @@ public class DoorTrigger : MonoBehaviour
     public GameObject hiddenDoor;
     [SerializeField] private Animator anim1 = null;
     [SerializeField] private Animator anim2 = null;
-
     void Start()
     {
         
@@ -16,7 +15,6 @@ public class DoorTrigger : MonoBehaviour
     {
         if(collider.CompareTag("Player") || collider.CompareTag("puzzlebox"))
         {
-
             anim1.Play("dooropen");
             anim2.Play("dooropen1");
         }
