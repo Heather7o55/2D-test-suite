@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class Wallcamerashake : MonoBehaviour
 {
-    private GameObject camera;
+    private GameObject cameraRef;
     private CameraController cameraScript;
     // Start is called before the first frame update
     void Start()
     {
-        camera = GameObject.FindWithTag("MainCamera");
-        cameraScript = camera.GetComponent<CameraController>();
+        cameraRef = GameObject.FindWithTag("MainCamera");
+        cameraScript = cameraRef.GetComponent<CameraController>();
     }
 
     // Update is called once per frame
-   void OnColisionEnter2D(Collider2D collider)
+   private void OnCollisionEnter2D(Collision2D col)
    {
-        StartCoroutine(cameraScript.Shake(0.2f, 0.2f));
+        if(col.gameObject.CompareTag("Player"))
+        {
+            cameraScript.CameraShake(0.2f, 0.2f);
+        }
    }
 }

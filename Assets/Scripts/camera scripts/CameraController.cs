@@ -12,6 +12,10 @@ public class CameraController : MonoBehaviour
         followTarget = playerfollow.transform;
     }
     public float smoothTime = 0.3f;
+    public void CameraShake(float duration, float magnitude)
+    {
+        StartCoroutine(Shake(duration, magnitude));
+    }
     // Start is called before the first frame updatepublic IEnumerator Shake(float duration, float magnitude)
     public IEnumerator Shake(float duration, float magnitude)
     {

@@ -13,14 +13,14 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb2d;
     public float moveSpeed = 10f;
     public float sprintModifer = 1.5f;
-    private GameObject camera;
+    private GameObject cameracontrol;
     private CameraController cameraScript;
     private Camera CameraSettings;
     void Start()
     {
-        camera = GameObject.FindWithTag("MainCamera");
-        CameraSettings = camera.GetComponent<Camera>();
-        cameraScript = camera.GetComponent<CameraController>();
+        cameracontrol = GameObject.FindWithTag("MainCamera");
+        CameraSettings = cameracontrol.GetComponent<Camera>();
+        cameraScript = cameracontrol.GetComponent<CameraController>();
         rb2d = GetComponent<Rigidbody2D>();
     }
     void Update()
