@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
         isCooldown = true;
         isSliding = true;
         Vector2 moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));   // For vertical movement (up/down)
+        moveDirection.Normalize();
         rb2d.AddForce(moveDirection * slidespeed);
         StartCoroutine("stopSlide");
     }
