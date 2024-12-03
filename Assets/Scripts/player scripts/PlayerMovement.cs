@@ -34,7 +34,10 @@ public class PlayerMovement : MonoBehaviour
         else if(Input.GetKey(KeyCode.LeftShift) && !isSliding)
         {
             rb2d.velocity = moveDirection * moveSpeed * sprintModifer;
-            cameraScript.ZoomCamera(165, 15);
+            if(!moveDirection.Equals(new Vector2(0,0)))
+            {
+                cameraScript.ZoomCamera(165, 15);
+            }
         }
         else if(!isSliding)
         {
@@ -45,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         mousePosition = CameraSettings.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 10));
         Vector2 direction = mousePosition - transform.position;
         float angle = Vector2.SignedAngle(Vector2.right, direction);
-        rb2d.MoveRotation(angle);
+        rb2d.MoveRotation(angle -2.0f);
     }
     private void slide()
     {
