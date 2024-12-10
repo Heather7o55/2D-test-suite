@@ -13,7 +13,7 @@ public class DoorTrigger : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.CompareTag("Player") || collider.CompareTag("puzzlebox"))
+        if(collider.CompareTag("Player") || collider.CompareTag("Enemy"))
         {
             anim1.Play("dooropen");
             anim2.Play("dooropen1");
@@ -22,7 +22,7 @@ public class DoorTrigger : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collider)
     {
-        if(collider.CompareTag("Player") || collider.CompareTag("puzzlebox"))
+        if(collider.CompareTag("Player") || collider.CompareTag("Enemy"))
         {
             anim1.Play("doorclose");
             anim2.Play("doorclose1");

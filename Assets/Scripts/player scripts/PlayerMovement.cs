@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         moveDirection.Normalize();
         if(Input.GetKey(KeyCode.LeftControl) && !isSliding && !isCooldown)
         {
+            
             slide();
         }
         else if(Input.GetKey(KeyCode.LeftShift) && !isSliding)
@@ -36,23 +37,24 @@ public class PlayerMovement : MonoBehaviour
             rb2d.velocity = moveDirection * moveSpeed * sprintModifer;
             if(!moveDirection.Equals(new Vector2(0,0)))
             {
-                cameraScript.ZoomCamera(165, 15);
+                cameraScript.ZoomCamera(65, 15);
             }
         }
         else if(!isSliding)
         {
-            cameraScript.ZoomCamera(164, 15);
+            cameraScript.ZoomCamera(64, 15);
             rb2d.velocity = moveDirection * moveSpeed;
         }
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = CameraSettings.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 10));
         Vector2 direction = mousePosition - transform.position;
         float angle = Vector2.SignedAngle(Vector2.right, direction);
-        rb2d.MoveRotation(angle -2.0f);
+        rb2d.MoveRotation(angle);
     }
     private void slide()
     {
         isCooldown = true;
+        cameraScript.ZoomCamera(60, 15);
         isSliding = true;
         Vector2 moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));   // For vertical movement (up/down)
         moveDirection.Normalize();
@@ -61,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     }
     IEnumerator stopSlide()
     {
-        cameraScript.ZoomCamera(160, 35);
+        
         yield return new WaitForSeconds(coolDown);
         isSliding = false;
         StartCoroutine("startCooldown");
