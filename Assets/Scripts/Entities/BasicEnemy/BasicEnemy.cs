@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BasicEnemy : MonoBehaviour
+public class BasicEnemy : BaseEntity
 {
     Renderer self;
     Vector3 tmp;
@@ -12,6 +12,8 @@ public class BasicEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        maxHealth = 10;
+        Setup();
         tmp = transform.position;
         self = GetComponent<Renderer>();
         agent = GetComponent<NavMeshAgent>();

@@ -19,7 +19,6 @@ public class CameraController : MonoBehaviour
     {
         StartCoroutine(Shake(duration, magnitude));
     }
-    // Start is called before the first frame updatepublic IEnumerator Shake(float duration, float magnitude)
     public IEnumerator Shake(float duration, float magnitude)
     {
         Vector3 originalPos = followTarget;
@@ -40,7 +39,7 @@ public class CameraController : MonoBehaviour
     }
     public void ZoomCamera(float target, float zoomSpeed)
     {
-        GetComponent<Camera>().fieldOfView = Mathf.MoveTowards(GetComponent<Camera>().fieldOfView, target, zoomSpeed * Time.deltaTime);
+        GetComponent<Camera>().fieldOfView = Mathf.Lerp(GetComponent<Camera>().fieldOfView, target, zoomSpeed * Time.deltaTime);
     }
     void LateUpdate()
     {

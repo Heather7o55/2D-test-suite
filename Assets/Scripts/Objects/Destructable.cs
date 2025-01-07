@@ -37,6 +37,10 @@ public class Destructable : MonoBehaviour
         {
             Health--;
         }
+        if(collision2D.gameObject.CompareTag("Enemy"))
+        {
+            collision2D.gameObject.GetComponent<BaseEntity>()?.TakeDamage(1);
+        }
         if(Health <= 1)
         {
             if(hasAudio == true)
