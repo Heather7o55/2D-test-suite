@@ -25,6 +25,7 @@ public class BasicEnemy : BaseEntity
     // Update is called once per frame
     void Update()
     {
+        if((float)currentHealth <= (float)maxHealth * 0.25f) {Debug.LogWarning(gameObject.name + "Is low on health");}
         if(self.isVisible)
         {
             tmp = player.transform.position;

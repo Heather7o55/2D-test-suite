@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour
     }
     public void ZoomCamera(float target, float zoomSpeed)
     {
-        GetComponent<Camera>().fieldOfView = Mathf.Lerp(GetComponent<Camera>().fieldOfView, target, zoomSpeed * Time.deltaTime);
+        GetComponent<Camera>().fieldOfView = Mathf.MoveTowards(GetComponent<Camera>().fieldOfView, target, zoomSpeed * Time.deltaTime);
     }
     void LateUpdate()
     {

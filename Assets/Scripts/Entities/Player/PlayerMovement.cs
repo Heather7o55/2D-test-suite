@@ -6,27 +6,23 @@ public class PlayerMovement : BaseEntity
 {
     float slideCoolDown = 0.4f;
     bool isSlideCooldown = false;
-
     public float slidespeed = 500f;
     public bool isSliding = false;
-
-    GameObject hand;
-
     public float moveSpeed = 10f;
     public float sprintModifer = 1.5f;
-
     private CameraController cameraScript;
-
+    private Vector2 moveDirection;
     void Start()
     {
         maxHealth = 100;
         Setup();
         cameraScript = GameObject.FindWithTag("MainCamera").GetComponent<CameraController>();
-        hand = transform.GetChild(0).gameObject;
     }
     void Update()
     {
-        Vector2 moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        // Debug.Log(gameObject.name + "'s velocity is " + selfRidgidBody.velocity);
+        // Debug.Log("The current <b>timestamp</b> is " + Time.time);
+        moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         moveDirection.Normalize();
         if((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.Space)) && !isSliding && !isSlideCooldown)
         {
@@ -41,18 +37,12 @@ public class PlayerMovement : BaseEntity
             selfRidgidBody.velocity = moveDirection * moveSpeed;
         }
         updateCamera();
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 10));
-        Vector2 direction = mousePosition - transform.position;
-        float angle = Vector2.SignedAngle(Vector2.right, direction);
-        hand.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        selfRidgidBody.MoveRotation(angle);
     }
+    
     private void slide()
     {
         isSlideCooldown = true;
         isSliding = true;
-        Vector2 moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));   // For vertical movement (up/down)
         moveDirection.Normalize();
         selfRidgidBody.AddForce(moveDirection * slidespeed);
         StartCoroutine("stopSlide");
