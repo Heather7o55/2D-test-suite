@@ -49,11 +49,15 @@ public class PlayerMovement : BaseEntity
     }
     private void updateCamera()
     {
-        if(isSliding)
+        if(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).Equals(new Vector2(0,0)))
+        {
+            cameraScript.ZoomCamera(64f, 15f);
+        }
+        else if(isSliding)
         {
             cameraScript.ZoomCamera(60f, 15f);
         }
-        else if(Input.GetKey(KeyCode.LeftShift) && !new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).Equals(new Vector2(0,0)))
+        else if(Input.GetKey(KeyCode.LeftShift) )
         {
             cameraScript.ZoomCamera(66f, 15f);
         }

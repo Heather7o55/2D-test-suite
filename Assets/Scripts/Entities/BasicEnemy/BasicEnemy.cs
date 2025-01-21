@@ -12,7 +12,7 @@ public class BasicEnemy : BaseEntity
     // Start is called before the first frame update
     void Start()
     {
-        maxHealth = 10;
+        maxHealth = 3;
         Setup();
         tmp = transform.position;
         self = GetComponent<Renderer>();
@@ -25,13 +25,13 @@ public class BasicEnemy : BaseEntity
     // Update is called once per frame
     void Update()
     {
-        if((float)currentHealth <= (float)maxHealth * 0.25f) {Debug.LogWarning(gameObject.name + "Is low on health");}
+        Vector3 direction = player.transform.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        selfRidgidBody.rotation = angle;
         if(self.isVisible)
         {
             tmp = player.transform.position;
         }
         agent.SetDestination(tmp);
     }
-
-   
 }

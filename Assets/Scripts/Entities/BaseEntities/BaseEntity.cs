@@ -11,17 +11,16 @@ public class BaseEntity : MonoBehaviour
     // Start is called before the first frame update
     public void Setup()
     {
-        Debug.Log(gameObject.name);
+        // Debug.Log(gameObject.name);
         currentHealth = maxHealth;
         selfRidgidBody = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     public void TakeDamage(int damage)
     {
-        Debug.Log(gameObject.name + " took " + damage + " damage");
+        // Debug.Log(gameObject.name + " took " + damage + " damage");
         currentHealth -= damage;
-        if((float)currentHealth <= (float)maxHealth * 0.25f) {Debug.LogWarning(gameObject.name + "Is low on health");}
+        // if(currentHealth <= maxHealth / 4f) {Debug.LogWarning(gameObject.name + "Is low on health");}
         if(currentHealth <= 0)
         {
             Die();
@@ -37,11 +36,11 @@ public class BaseEntity : MonoBehaviour
     }
     public void IncreaseMaxHealth(int modifer)
     {
-        maxHealth = maxHealth + modifer;
+        maxHealth += modifer;
     }
     public void Die()
     {
-        Debug.Log(gameObject.name + " died");
+        // Debug.Log(gameObject.name + " died");
         Destroy(gameObject);
     }
 }
