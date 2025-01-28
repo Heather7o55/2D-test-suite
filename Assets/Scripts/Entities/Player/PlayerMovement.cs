@@ -22,6 +22,7 @@ public class PlayerMovement : BaseEntity
     {
         // Debug.Log(gameObject.name + "'s velocity is " + selfRidgidBody.velocity);
         // Debug.Log("The current <b>timestamp</b> is " + Time.time);
+        if(UIManager.isPaused) return;
         moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         moveDirection.Normalize();
         if((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.Space)) && !isSliding && !isSlideCooldown)

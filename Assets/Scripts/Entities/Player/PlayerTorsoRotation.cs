@@ -14,7 +14,7 @@ public class PlayerTorsoRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        updatePlayerRotation();
+        if(!UIManager.isPaused) updatePlayerRotation();
     }
     private void updatePlayerRotation()
     {
