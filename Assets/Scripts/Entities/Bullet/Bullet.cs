@@ -14,6 +14,6 @@ public class Bullet : BaseEntity
         {
             col.gameObject.GetComponent<BaseEntity>()?.TakeDamage(damage);
         }
-        TakeDamage(1);
+        if(!col.gameObject.CompareTag("bullet")) TakeDamage(1);
     }
 }

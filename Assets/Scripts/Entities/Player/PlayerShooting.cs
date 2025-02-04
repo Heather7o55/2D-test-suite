@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    GameObject[] bullets;
     public GameObject bulletPrefab;
     public Transform firePointRotation;
     public Transform bulletSpawnPoint;
-    public float bulletSpeed = 20f;
     public Animator anim;
+    public int pellets = 5;
+    
     public enum Gun
     {
         Pistol,
@@ -33,37 +33,45 @@ public class PlayerShooting : MonoBehaviour
     }
     void Shoot()
     {
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, firePointRotation.rotation);
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.velocity = firePointRotation.right * bulletSpeed;
-        Destroy(bullet, 10f);
+       
         switch(activeGun)
         {
             case Gun.Pistol:
                 anim.Play("MuzzleFlash");
+                CreateBullet(0f, 20f, 1);
                 StartCoroutine(GunCoolDown(0.3f));
                 break;
             case Gun.Rifle:
                 anim.Play("MuzzleFlash");
+                CreateBullet(0f, 25f, 1);
                 StartCoroutine(GunCoolDown(0.1f));
                 break;
             case Gun.Shotgun:
                 anim.Play("MuzzleFlash");
+                Shotgun();
                 StartCoroutine(GunCoolDown(0.5f));
                 break;
             case Gun.Sniper:
                 anim.Play("MuzzleFlash");
+                CreateBullet(0f, 50f, 3);
                 StartCoroutine(GunCoolDown(0.75f));
                 break;
         }
     }
-    void CreateBullets(int ammount, int speed)
+    void CreateBullet(float range, float speed, int damage)
+    {  
+        
+        GameObject bullet = Instantiate(bulletPrefab, new Vector3(bulletSpawnPoint.position.x, 
+            Random.Range(bulletSpawnPoint.position.y - range, bulletSpawnPoint.position.y + range), 
+            bulletSpawnPoint.position.z), firePointRotation.rotation);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.velocity = firePointRotation.right * speed;
+        bullet.GetComponent<Bullet>().damage = damage;
+        Destroy(bullet, 10f);
+    }
+    void Shotgun()
     {
-        for(int i = 0; i < ammount; i++)
-        {
-            bullets[i] = Instantiate(bulletPrefab, new Vector3(bulletSpawnPoint.position.x, Random.Range(bulletSpawnPoint.position.y - 0.5f, bulletSpawnPoint.position.y + 0.5f), bulletSpawnPoint.position.z), firePointRotation.rotation);
-            bullets[i].GetComponent<Rigidbody2D>();
-        }
+        for(int i = 0; i < pellets; i++) CreateBullet(0.35f, 10f, 1);
     }
     IEnumerator GunCoolDown(float timer)
     {
