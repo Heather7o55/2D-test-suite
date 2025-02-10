@@ -9,11 +9,9 @@ public class Bullet : BaseEntity
     void Start() {Setup();}
     void OnCollisionEnter2D(Collision2D col)
     {
-        if(ricochets > 0) {return;}
+        if(ricochets > 0) return;
         if(col.gameObject.CompareTag("Enemy"))
-        {
-            col.gameObject.GetComponent<BaseEntity>()?.TakeDamage(damage);
-        }
-        if(!col.gameObject.CompareTag("bullet")) TakeDamage(1);
+            col.gameObject.GetComponent<BaseEntity>()?.ModifyHealth(damage);
+        ModifyHealth(1);
     }
 }

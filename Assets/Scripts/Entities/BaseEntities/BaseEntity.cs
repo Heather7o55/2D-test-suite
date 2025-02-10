@@ -16,25 +16,16 @@ public class BaseEntity : MonoBehaviour
         selfRidgidBody = GetComponent<Rigidbody2D>();
     }
 
-    public void TakeDamage(int damage)
-    {
-        // Debug.Log(gameObject.name + " took " + damage + " damage");
-        currentHealth -= damage;
-        // if(currentHealth <= maxHealth / 4f) {Debug.LogWarning(gameObject.name + "Is low on health");}
-        if(currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-    public void GainHealth(int modifer)
+    public void ModifyHealth(int modifer)
     {
         currentHealth += modifer;
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
         }
+        if(currentHealth <=0) Die();
     }
-    public void IncreaseMaxHealth(int modifer)
+    public void ModifyHealthMaxHealth(int modifer)
     {
         maxHealth += modifer;
     }

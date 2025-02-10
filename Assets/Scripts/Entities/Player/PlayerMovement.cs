@@ -79,4 +79,5 @@ public class PlayerMovement : BaseEntity
         yield return new WaitForSeconds(slideCoolDown);
         isSlideCooldown = false;
     }
+    
 }
