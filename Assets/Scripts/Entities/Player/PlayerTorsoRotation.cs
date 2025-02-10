@@ -14,9 +14,9 @@ public class PlayerTorsoRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!UIManager.isPaused) updatePlayerRotation();
+        if(!UIManager.isPaused) UpdatePlayerRotation();
     }
-    private void updatePlayerRotation()
+    private void UpdatePlayerRotation()
     {
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 10));

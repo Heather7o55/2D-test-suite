@@ -7,27 +7,27 @@ public class BaseEntity : MonoBehaviour
 {
     public int maxHealth;
     public int currentHealth;
-    public Rigidbody2D selfRidgidBody;
+    public Rigidbody2D selfRigidBody;
     // Start is called before the first frame update
     public void Setup()
     {
         // Debug.Log(gameObject.name);
         currentHealth = maxHealth;
-        selfRidgidBody = GetComponent<Rigidbody2D>();
+        selfRigidBody = GetComponent<Rigidbody2D>();
     }
 
-    public void ModifyHealth(int modifer)
+    public void ModifyHealth(int modifier)
     {
-        currentHealth += modifer;
+        currentHealth += modifier;
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
         }
         if(currentHealth <=0) Die();
     }
-    public void ModifyHealthMaxHealth(int modifer)
+    public void ModifyHealthMaxHealth(int modifier)
     {
-        maxHealth += modifer;
+        maxHealth += modifier;
     }
     public void Die()
     {

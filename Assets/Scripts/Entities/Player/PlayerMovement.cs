@@ -6,10 +6,10 @@ public class PlayerMovement : BaseEntity
 {
     float slideCoolDown = 0.4f;
     bool isSlideCooldown = false;
-    public float slidespeed = 500f;
+    public float slideSpeed = 500f;
     public bool isSliding = false;
     public float moveSpeed = 10f;
-    public float sprintModifer = 1.5f;
+    public float sprintModifier = 1.5f;
     private CameraController cameraScript;
     private Vector2 moveDirection;
     void Start()
@@ -31,11 +31,11 @@ public class PlayerMovement : BaseEntity
         }
         else if(Input.GetKey(KeyCode.LeftShift) && !isSliding)
         {
-            selfRidgidBody.velocity = moveDirection * moveSpeed * sprintModifer;
+            selfRigidBody.velocity = moveDirection * moveSpeed * sprintModifier;
         }
         else if(!isSliding)
         {
-            selfRidgidBody.velocity = moveDirection * moveSpeed;
+            selfRigidBody.velocity = moveDirection * moveSpeed;
         }
         updateCamera();
     }
@@ -45,7 +45,7 @@ public class PlayerMovement : BaseEntity
         isSlideCooldown = true;
         isSliding = true;
         moveDirection.Normalize();
-        selfRidgidBody.AddForce(moveDirection * slidespeed);
+        selfRigidBody.AddForce(moveDirection * slideSpeed);
         StartCoroutine("stopSlide");
     }
     private void updateCamera()

@@ -6,7 +6,7 @@ using UnityEngine;
 public class button : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float timealloted = 5;
+    public float timeAlloted = 5;
     public string[] tags;
     float sec;
     public GameObject hiddenDoor;
@@ -14,7 +14,7 @@ public class button : MonoBehaviour
 
     void Update()
     {
-        if(sec <= timealloted)
+        if(sec <= timeAlloted)
         { 
             ChangeColor(new Color (0.5f, 0, 0, 1));
             hiddenDoor.SetActive(false);
@@ -29,7 +29,7 @@ public class button : MonoBehaviour
     }
     void Start()
     {
-        sec = timealloted;
+        sec = timeAlloted;
         renderers = GetComponentsInChildren<Renderer>();
         ChangeColor(new Color (1, 0, 0, 1));
     }

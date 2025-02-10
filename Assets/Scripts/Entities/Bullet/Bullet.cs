@@ -11,7 +11,8 @@ public class Bullet : BaseEntity
     {
         if(ricochets > 0) return;
         if(col.gameObject.CompareTag("Enemy"))
-            col.gameObject.GetComponent<BaseEntity>()?.ModifyHealth(damage);
-        ModifyHealth(1);
+            col.gameObject.GetComponent<BaseEntity>()?.ModifyHealth(-damage);
+        if(!col.gameObject.CompareTag("Bullet"))
+            ModifyHealth(-1);
     }
 }

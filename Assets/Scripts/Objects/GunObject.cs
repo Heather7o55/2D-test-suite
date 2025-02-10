@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class GunObject : MonoBehaviour
 {
-    public PlayerShooting.Gun localGun;
+    public GunController.Gun localGun;
     // Start is called before the first frame update
      void OnTriggerEnter2D(Collider2D collider)
      {
