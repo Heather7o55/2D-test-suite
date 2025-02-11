@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/* Theoretically this should be a static class, however unity doesnt let me inherit GetComponent, 
+Instantiate, or Destroy unless its a monobehaviour */
 public class GunController : MonoBehaviour
 {
     public enum Gun
@@ -11,7 +12,9 @@ public class GunController : MonoBehaviour
         Shotgun,
         Sniper
     }
- public static void CreateBullet(float range, float speed, int damage, Transform spawnPoint, Transform firePointRotation, GameObject bulletPrefab)
+    /* "CreateBullet" takes in the range, aka the spread, the bullet speed, the damage,
+    the spawnpoint, the rotation transform of the charcter its spawning from, and the bullet object it wants to spawn  */
+    public static void CreateBullet(float range, float speed, int damage, Transform spawnPoint, Transform firePointRotation, GameObject bulletPrefab)
     {  
         
         GameObject bullet = Instantiate(bulletPrefab, new Vector3(spawnPoint.position.x, 

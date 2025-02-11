@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6803332993822324973}
   - component: {fileID: 1799807582928633235}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: EnemyBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,5 +174,6 @@ MonoBehaviour:
   maxHealth: 1
   currentHealth: 1
   selfRigidBody: {fileID: 0}
+  isPlayer: 0
   damage: 1
   ricochets: 0

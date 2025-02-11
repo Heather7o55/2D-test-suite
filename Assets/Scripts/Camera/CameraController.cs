@@ -5,18 +5,17 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     private Vector3 velocity = Vector3.zero;
-    Camera cameraSettings;
     private GameObject player;
     Vector3 followTarget;
     void Start()
     {
         player = GameObject.FindWithTag("Player");
         followTarget = player.transform.localPosition;
-        cameraSettings = GetComponent<Camera>();
     }
     public float smoothTime = 0.3f;
     public void CameraShake(float duration, float magnitude)
     {
+        // This is in its own function as for some reason unity doesnt allow me to call an Enumerator from another class even if its public??? 
         StartCoroutine(Shake(duration, magnitude));
     }
     public IEnumerator Shake(float duration, float magnitude)
@@ -28,7 +27,7 @@ public class CameraController : MonoBehaviour
             float xOffset = Random.Range(-0.5f, 0.5f) * magnitude;
             float yOffset = Random.Range(-0.5f, 0.5f) * magnitude;
             
-            transform.position = new Vector3((transform.position.x + xOffset), (transform.position.y + yOffset), originalPos.z);
+            transform.position = new Vector3(transform.position.x + xOffset, transform.position.y + yOffset, originalPos.z);
 
             elapsedTime += Time.deltaTime;
 

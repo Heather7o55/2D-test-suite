@@ -15,7 +15,7 @@ public class BaseEntity : MonoBehaviour
         currentHealth = maxHealth;
         selfRigidBody = GetComponent<Rigidbody2D>();
     }
-
+    // ModifyHeath allows you to increase or decrease heath in one function by sending a positive or negative value
     public void ModifyHealth(int modifier)
     {
         currentHealth += modifier;
@@ -25,9 +25,14 @@ public class BaseEntity : MonoBehaviour
         }
         if(currentHealth <=0) Die();
     }
-    public void ModifyHealthMaxHealth(int modifier)
+    // ModifyMaxHeath allows you to increase or decrease maxheath in one function by sending a positive or negative value
+    public void ModifyMaxHealth(int modifier)
     {
         maxHealth += modifier;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
     }
     public void Die()
     {
