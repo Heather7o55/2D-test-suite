@@ -8,6 +8,7 @@ TagManager:
   - mouselook
   - Enemy
   - Bullet
+  - HUD
   layers:
   - Default
   - TransparentFX

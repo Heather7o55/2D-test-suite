@@ -765,7 +765,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.9970026, y: 1}
+  m_Size: {x: 3.9970026, y: 2.969791}
   m_EdgeRadius: 0
 --- !u!114 &588274069
 MonoBehaviour:
@@ -847,13 +847,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb053cba405a9b910bbaf0adec627f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 10
+  currentHealth: 10
   selfRigidBody: {fileID: 0}
   slideSpeed: 500
   isSliding: 0
   moveSpeed: 5
   sprintModifier: 1.5
+  anim: {fileID: 748999297}
 --- !u!61 &594083279
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2144,7 +2145,7 @@ GameObject:
   - component: {fileID: 1282086214}
   m_Layer: 5
   m_Name: H.U.D
-  m_TagString: Untagged
+  m_TagString: HUD
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
