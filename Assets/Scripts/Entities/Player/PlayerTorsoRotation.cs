@@ -20,9 +20,7 @@ public class PlayerTorsoRotation : MonoBehaviour
     {
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 10));
-        Vector2 direction = mousePosition - transform.position;
-        float angle = Vector2.SignedAngle(Vector2.right, direction);
-        hand.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        hand.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Vector2.SignedAngle(Vector2.right, mousePosition - hand.transform.position)));
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, Vector2.SignedAngle(Vector2.right, mousePosition - transform.position)));
     }
 }

@@ -21,6 +21,10 @@ public class BasicEnemy : BaseEntity
         agent.updateUpAxis = false;
         player = GameObject.FindWithTag("Player");
     }
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.CompareTag("Player")) col.gameObject.GetComponent<BaseEntity>()?.ModifyHealth(-1);
+    }
 
     // Update is called once per frame
     void Update()
@@ -33,5 +37,11 @@ public class BasicEnemy : BaseEntity
             tmp = player.transform.position;
         }
         agent.SetDestination(tmp);
+    }
+    bool canSeePlayer()
+    {
+        RaycastHit2D ray = Physics2D.Raycast(transform.position, player.transform.position - transform.position);
+        if(ray.collider == null) return false;
+        else return ray.collider.CompareTag("Player");
     }
 }
