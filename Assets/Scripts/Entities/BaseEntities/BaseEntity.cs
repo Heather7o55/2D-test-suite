@@ -20,19 +20,15 @@ public class BaseEntity : MonoBehaviour
     {
         currentHealth += modifier;
         if (currentHealth > maxHealth)
-        {
             currentHealth = maxHealth;
-        }
-        if(currentHealth <=0) Die();
+        if(currentHealth <= 0) Die();
     }
-    // ModifyMaxHeath allows you to increase or decrease maxheath in one function by sending a positive or negative value
+    // ModifyMaxHeath allows you to increase or decrease "maxhealth" in one function by sending a positive or negative value
     public void ModifyMaxHealth(int modifier)
     {
         maxHealth += modifier;
         if (currentHealth > maxHealth)
-        {
             currentHealth = maxHealth;
-        }
     }
     public void Die()
     {

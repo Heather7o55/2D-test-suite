@@ -15,10 +15,10 @@ public class CameraController : MonoBehaviour
     public float smoothTime = 0.3f;
     public void CameraShake(float duration, float magnitude)
     {
-        // This is in its own function as for some reason unity doesnt allow me to call an Enumerator from another class even if its public??? 
+        // This is in its own function as for some reason unity doesn't allow me to call an Enumerator from another class even if its public??? 
         StartCoroutine(Shake(duration, magnitude));
     }
-    public IEnumerator Shake(float duration, float magnitude)
+    private IEnumerator Shake(float duration, float magnitude)
     {
         Vector3 originalPos = followTarget;
         float elapsedTime = 0f;
@@ -33,7 +33,6 @@ public class CameraController : MonoBehaviour
 
             yield return null;
         }
-
         transform.position = originalPos;
     }
     public void ZoomCamera(float target, float zoomSpeed)
@@ -61,7 +60,7 @@ public class CameraController : MonoBehaviour
         UpdateCameraPosition(followTarget, smoothTime);
     }
     
-    void UpdateCameraPosition(Vector3 Position, float smoothing)
+    private void UpdateCameraPosition(Vector3 Position, float smoothing)
     {
         transform.position = Vector3.SmoothDamp(transform.position, Position, ref velocity, smoothing);
     }   

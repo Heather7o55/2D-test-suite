@@ -23,7 +23,7 @@ public class PlayerController : BaseEntity
     }
     void Update()
     {
-        // Debug.Log(gameObject.name + "'s velocity is " + selfRidgidBody.velocity);
+        // Debug.Log(gameObject.name + "'s velocity is " + selfRigidBody.velocity);
         // Debug.Log("The current <b>timestamp</b> is " + Time.time);
         if(UIManager.isPaused) return;
         UpdateMovement();

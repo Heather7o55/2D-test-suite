@@ -27,9 +27,7 @@ public class PlayerShooting : MonoBehaviour
     {
         if(UIManager.isPaused) return;
         if(Input.GetButton("Fire1") && canShoot)
-        {
             Shoot();
-        }   
     }
     void Shoot()
     {
