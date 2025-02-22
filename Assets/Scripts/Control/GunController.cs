@@ -5,12 +5,13 @@ using UnityEngine;
 Instantiate, or Destroy unless its a monobehaviour */
 public class GunController : MonoBehaviour
 {
-    public enum Gun
+    public enum Weapon
     {
         Pistol,
         Rifle,
         Shotgun,
-        Sniper
+        Sniper,
+        Bat
     }
     /* "CreateBullet" takes in the range, aka the spread, the bullet speed, the damage,
     the spawnpoint, the rotation transform of the character its spawning from, and the bullet object it wants to spawn  */
@@ -24,5 +25,9 @@ public class GunController : MonoBehaviour
         rb.velocity = firePointRotation.right * speed;
         bullet.GetComponent<Bullet>().damage = damage;
         Destroy(bullet, 10f);
+    }
+    public static void SwingBat(GameObject hitbox)
+    {
+        hitbox.SetActive(true);
     }
 }

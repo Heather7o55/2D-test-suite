@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static GunController;
 
 public class PlayerShooting : MonoBehaviour
 {
     public GameObject bulletPrefab;
+    public GameObject batHitbox;
     public Transform firePointRotation;
     public Transform bulletSpawnPoint;
     public Animator anim;
@@ -17,14 +19,16 @@ public class PlayerShooting : MonoBehaviour
     public AudioSource audioSource;
     
 
-    public static Gun activeGun = Gun.Pistol;
+    public static Weapon activeGun = Weapon.Pistol;
     bool canShoot = true;
+    bool batActive = false;
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
     }
     void Update()
     {
+        batHitbox.SetActive(batActive);
         if(UIManager.isPaused) return;
         if(Input.GetButton("Fire1") && canShoot)
             Shoot();
@@ -34,29 +38,32 @@ public class PlayerShooting : MonoBehaviour
        
         switch(activeGun)
         {
-            case Gun.Pistol:
+            case Weapon.Pistol:
                 anim.Play("MuzzleFlash");
                 CreateBullet(0f, 20f, 1, bulletSpawnPoint, firePointRotation, bulletPrefab);
                 audioSource.clip = pistol;
                 StartCoroutine(GunCoolDown(0.3f));
                 break;
-            case Gun.Rifle:
+            case Weapon.Rifle:
                 anim.Play("MuzzleFlash");
                 CreateBullet(0f, 25f, 1, bulletSpawnPoint, firePointRotation, bulletPrefab);
                 audioSource.clip = rifle;
                 StartCoroutine(GunCoolDown(0.1f));
                 break;
-            case Gun.Shotgun:
+            case Weapon.Shotgun:
                 anim.Play("MuzzleFlash");
                 Shotgun(bulletSpawnPoint, firePointRotation, bulletPrefab);
                 audioSource.clip = shotgun;
                 StartCoroutine(GunCoolDown(0.5f));
                 break;
-            case Gun.Sniper:
+            case Weapon.Sniper:
                 anim.Play("MuzzleFlash");
                 CreateBullet(0f, 50f, 3, bulletSpawnPoint, firePointRotation, bulletPrefab);
                 audioSource.clip = sniper;
                 StartCoroutine(GunCoolDown(0.75f));
+                break;
+            case Weapon.Bat:
+                StartCoroutine(BatSwingTime(0.5f));
                 break;
         }
         audioSource.Play();
@@ -68,8 +75,17 @@ public class PlayerShooting : MonoBehaviour
     }
     IEnumerator GunCoolDown(float timer)
     {
+        Debug.Log("cooldown active");
         canShoot = false;
         yield return new WaitForSeconds(timer);
         canShoot = true;
     }
+    IEnumerator BatSwingTime(float timer)
+    {
+        Debug.Log("cooldown active");
+        batActive = true;
+        yield return new WaitForSeconds(timer);
+        batActive = false;
+    }
+
 }

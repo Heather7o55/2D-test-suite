@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunObject : MonoBehaviour
 {
-    public GunController.Gun localGun;
+    public GunController.Weapon localGun;
     // Start is called before the first frame update
      void OnTriggerEnter2D(Collider2D collider)
      {
