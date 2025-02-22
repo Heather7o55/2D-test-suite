@@ -6,12 +6,13 @@ using UnityEngine.AI;
 public class BasicEnemy : BaseEntity
 {
     Renderer self;
-    Transform[] tmp;
+    public GameObject[] tmp;
     NavMeshAgent agent;
     GameObject player;
     // Start is called before the first frame update
     void Start()
     {
+        tmp = GameObject.FindGameObjectsWithTag("Goal");
         maxHealth = 3;
         Setup();
         self = GetComponent<Renderer>();
@@ -28,7 +29,8 @@ public class BasicEnemy : BaseEntity
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = tmp[Random.Range(0,tmp.Length)].position;
+        Vector3 direction = tmp[Random.Range(0,tmp.Length)].transform.position;
+        new Vector3(UnityEngine.Random.Range((float)(direction.x - 1.3), (float)(direction.x + 1.3)), direction.y, direction.z);
         float angle = Mathf.Atan2(direction.y - transform.position.y, direction.x - transform.position.x) * Mathf.Rad2Deg;
         selfRigidBody.rotation = angle;
 

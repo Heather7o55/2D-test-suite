@@ -103,6 +103,12 @@ MonoBehaviour:
   maxHealth: 0
   currentHealth: 0
   selfRigidBody: {fileID: 0}
+  tmp:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!195 &5147965579083699226
 NavMeshAgent:
   m_ObjectHideFlags: 0
