@@ -9,6 +9,9 @@ TagManager:
   - Enemy
   - Bullet
   - HUD
+  - Table
+  - Goal
+  - TableFliped
   layers:
   - Default
   - TransparentFX

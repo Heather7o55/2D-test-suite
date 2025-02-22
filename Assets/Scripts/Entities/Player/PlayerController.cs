@@ -38,9 +38,9 @@ public class PlayerController : BaseEntity
     {
         moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         moveDirection.Normalize();
-        if((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.Space)) && !isSliding && !isSlideCooldown)
-            slide();
-        else if(Input.GetKey(KeyCode.LeftShift) && !isSliding)
+        //if((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.Space)) && !isSliding && !isSlideCooldown)
+        //    slide();
+        if(Input.GetKey(KeyCode.LeftShift) && !isSliding)
             selfRigidBody.velocity = moveDirection * moveSpeed * sprintModifier;
         else if(!isSliding)
             selfRigidBody.velocity = moveDirection * moveSpeed;

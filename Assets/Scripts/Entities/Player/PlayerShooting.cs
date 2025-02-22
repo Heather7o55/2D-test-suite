@@ -17,9 +17,11 @@ public class PlayerShooting : MonoBehaviour
     public AudioClip sniper;
     public AudioClip shotgun;
     public AudioSource audioSource;
+    public GameObject pistolsprite;
+    public GameObject batSprite;
     
     private CameraController cameraScript;
-    public static Weapon activeGun = Weapon.Pistol;
+    public static Weapon activeGun = Weapon.Bat;
     bool canShoot = true;
     bool batActive = false;
 
@@ -30,6 +32,10 @@ public class PlayerShooting : MonoBehaviour
     }
     void Update()
     {
+        if(activeGun == Weapon.Pistol) pistolsprite.SetActive(true);
+        else
+        {batSprite.SetActive(true); pistolsprite.SetActive(false);}
+        if(activeGun != Weapon.Bat) StartCoroutine(PowerUpTimer());
         batHitbox.SetActive(batActive);
         if(UIManager.isPaused) return;
         if(Input.GetButton("Fire1") && canShoot)
@@ -89,6 +95,12 @@ public class PlayerShooting : MonoBehaviour
         batActive = true;
         yield return new WaitForSeconds(timer);
         batActive = false;
+    }
+    IEnumerator PowerUpTimer()
+    {
+        Debug.Log("PowerUp Active");
+        yield return new WaitForSeconds(GameManagement.powerUpTimer);
+        activeGun = Weapon.Bat;
     }
 
 }

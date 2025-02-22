@@ -8,6 +8,7 @@ public class BaseEntity : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
     public Rigidbody2D selfRigidBody;
+    bool candie = true;
     // Start is called before the first frame update
     public void Setup()
     {
@@ -21,7 +22,7 @@ public class BaseEntity : MonoBehaviour
         currentHealth += modifier;
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
-        if(currentHealth <= 0) Die();
+        if(currentHealth <= 0 && candie) Die();
     }
     // ModifyMaxHeath allows you to increase or decrease "maxhealth" in one function by sending a positive or negative value
     public void ModifyMaxHealth(int modifier)
@@ -32,6 +33,10 @@ public class BaseEntity : MonoBehaviour
     }
     public void Die()
     {
+        if(UIManager.lost) return;
+        candie = false;
+        GameManagement.money++;
+        GoalScript.i++;
         // Debug.Log(gameObject.name + " died");
         Destroy(gameObject);
     }

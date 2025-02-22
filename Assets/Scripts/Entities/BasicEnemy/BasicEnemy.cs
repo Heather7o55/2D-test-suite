@@ -9,6 +9,7 @@ public class BasicEnemy : BaseEntity
     public GameObject[] tmp;
     NavMeshAgent agent;
     GameObject player;
+    Vector3 direction;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,8 @@ public class BasicEnemy : BaseEntity
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         player = GameObject.FindWithTag("Player");
+        direction = tmp[Random.Range(0,tmp.Length)].transform.position;
+        direction = new Vector3(UnityEngine.Random.Range((float)(direction.x - 1.3), (float)(direction.x + 1.3)), direction.y, direction.z);
     }
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -29,11 +32,6 @@ public class BasicEnemy : BaseEntity
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = tmp[Random.Range(0,tmp.Length)].transform.position;
-        new Vector3(UnityEngine.Random.Range((float)(direction.x - 1.3), (float)(direction.x + 1.3)), direction.y, direction.z);
-        float angle = Mathf.Atan2(direction.y - transform.position.y, direction.x - transform.position.x) * Mathf.Rad2Deg;
-        selfRigidBody.rotation = angle;
-
         agent.SetDestination(direction);
     }
     bool canSeePlayer()

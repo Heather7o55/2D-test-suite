@@ -10,7 +10,11 @@ public class EndlessSpawner : MonoBehaviour
     private float minimunSpawnInterval =1f;
     private float intervalDecrese = 0.1f;
     // Start is called before the first frame update
-    private void Start()
+    void Start()
+    {
+        Spawnwave();
+    }
+    public void Spawnwave()
     {
         StartCoroutine(SpawnEnemies());
     }
@@ -18,7 +22,8 @@ public class EndlessSpawner : MonoBehaviour
     // Update is called once per frame
     IEnumerator SpawnEnemies()
     {
-        while(true)
+        int i = 0;
+        while(i < GameManagement.Difficulty)
         {
             Transform localSpwnPoint = spawnPoint[UnityEngine.Random.Range(0, spawnPoint.Length)];
             // Here we try catch here, as we may want to know if we've failed to attach a spawnpoint or enemy to the spawner.
@@ -28,6 +33,7 @@ public class EndlessSpawner : MonoBehaviour
                 {Debug.LogError(error);}
             yield return new WaitForSeconds(spawnInterval);
             spawnInterval = MathF.Max(minimunSpawnInterval, spawnInterval = intervalDecrese);
+            i++;
         }
     }
 }
