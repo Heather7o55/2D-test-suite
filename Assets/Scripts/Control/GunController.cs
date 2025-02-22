@@ -26,8 +26,4 @@ public class GunController : MonoBehaviour
         bullet.GetComponent<Bullet>().damage = damage;
         Destroy(bullet, 10f);
     }
-    public static void SwingBat(GameObject hitbox)
-    {
-        hitbox.SetActive(true);
-    }
 }
