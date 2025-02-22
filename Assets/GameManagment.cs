@@ -7,7 +7,7 @@ public class GameManagement : MonoBehaviour
     public static bool tablesActive = false;
     public static int money = 0;
     GameObject table;
-    void Sart()
+    void Start()
     {
         table = GameObject.FindWithTag("Table");
     }

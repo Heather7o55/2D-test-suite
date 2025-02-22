@@ -14,7 +14,7 @@ public class BasicEnemy : BaseEntity
     {
         maxHealth = 3;
         Setup();
-        tmp = transform.position;
+        tmp = GameObject.FindWithTag("Goal").transform.position;
         self = GetComponent<Renderer>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -29,13 +29,10 @@ public class BasicEnemy : BaseEntity
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = player.transform.position - transform.position;
+        Vector3 direction = tmp - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         selfRigidBody.rotation = angle;
-        if(self.isVisible)
-        {
-            tmp = player.transform.position;
-        }
+
         agent.SetDestination(tmp);
     }
     bool canSeePlayer()
