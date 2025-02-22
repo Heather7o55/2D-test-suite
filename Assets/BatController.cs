@@ -5,7 +5,7 @@ using UnityEngine;
 public class BatController : MonoBehaviour
 {
     // Start is called before the first frame update
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerStay2D(Collider2D collision)
     {
         collision.gameObject.GetComponent<BaseEntity>().Die();
     }

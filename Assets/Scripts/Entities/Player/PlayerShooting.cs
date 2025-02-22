@@ -18,12 +18,14 @@ public class PlayerShooting : MonoBehaviour
     public AudioClip shotgun;
     public AudioSource audioSource;
     
-
+    private CameraController cameraScript;
     public static Weapon activeGun = Weapon.Pistol;
     bool canShoot = true;
     bool batActive = false;
+
     void Start()
     {
+        cameraScript = GameObject.FindWithTag("MainCamera").GetComponent<CameraController>();
         anim = GetComponentInChildren<Animator>();
     }
     void Update()
@@ -63,6 +65,7 @@ public class PlayerShooting : MonoBehaviour
                 StartCoroutine(GunCoolDown(0.75f));
                 break;
             case Weapon.Bat:
+                cameraScript.CameraShake(0.2f, 0.2f);
                 StartCoroutine(BatSwingTime(0.5f));
                 break;
         }
