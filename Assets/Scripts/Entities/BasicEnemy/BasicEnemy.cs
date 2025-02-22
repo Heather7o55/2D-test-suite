@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class BasicEnemy : BaseEntity
 {
     Renderer self;
-    Vector3 tmp;
+    Transform[] tmp;
     NavMeshAgent agent;
     GameObject player;
     // Start is called before the first frame update
@@ -14,7 +14,6 @@ public class BasicEnemy : BaseEntity
     {
         maxHealth = 3;
         Setup();
-        tmp = GameObject.FindWithTag("Goal").transform.position;
         self = GetComponent<Renderer>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -29,11 +28,11 @@ public class BasicEnemy : BaseEntity
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = tmp - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Vector3 direction = tmp[Random.Range(0,tmp.Length)].position;
+        float angle = Mathf.Atan2(direction.y - transform.position.y, direction.x - transform.position.x) * Mathf.Rad2Deg;
         selfRigidBody.rotation = angle;
 
-        agent.SetDestination(tmp);
+        agent.SetDestination(direction);
     }
     bool canSeePlayer()
     {
