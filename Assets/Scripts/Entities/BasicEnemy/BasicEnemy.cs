@@ -5,13 +5,21 @@ using UnityEngine.AI;
 
 public class BasicEnemy : BaseEntity
 {
+    public GameObject bulletPrefab;
+    public Transform bulletSpawnPoint;
     Renderer self;
     Vector3 tmp;
     NavMeshAgent agent;
     GameObject player;
+    private GunController gun;
+    bool canSeePlayer = false;
+    bool canShootPlayer = false;
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
+        gun = GetComponent<GunController>();
+        audioSource = GetComponent<AudioSource>();
         maxHealth = 3;
         Setup();
         tmp = transform.position;
@@ -28,20 +36,46 @@ public class BasicEnemy : BaseEntity
 
     // Update is called once per frame
     void Update()
-    {
-        Vector3 direction = player.transform.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        selfRigidBody.rotation = angle;
-        if(self.isVisible)
+    { 
+        if(!self.isVisible) return;
+        if(canSeePlayer)
         {
+            Vector3 direction = player.transform.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            selfRigidBody.rotation = angle;
             tmp = player.transform.position;
         }
+        if(canShootPlayer && gun.canShoot) Shoot();
         agent.SetDestination(tmp);
     }
-    bool canSeePlayer()
+    void Shoot()
     {
-        RaycastHit2D ray = Physics2D.Raycast(transform.position, player.transform.position - transform.position);
-        if(ray.collider == null) return false;
-        else return ray.collider.CompareTag("Player");
+        Debug.Log("enemy shooting");
+        //anim.Play("MuzzleFlash");
+        gun.CreateBullet(0f, 25f, 1, bulletSpawnPoint, transform, bulletPrefab);
+        gun.StartGunCooldown(0.4f);
+        audioSource.Play();
+    }
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player")) 
+        {
+            canSeePlayer = true;
+            canShootPlayer = true;
+        }
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            canShootPlayer = false;
+            StartCoroutine(LoosesInterest(2f));
+        } 
+    }
+    IEnumerator LoosesInterest(float timer)
+    {
+        canSeePlayer = true;
+        yield return new WaitForSeconds(timer);
+        canSeePlayer = false;
     }
 }

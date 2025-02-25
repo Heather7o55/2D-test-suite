@@ -8,8 +8,8 @@ public class EndlessSpawner : MonoBehaviour
     public GameObject objectToSpawn;
     public Transform spawnPoint;
     private float spawnInterval = 2f;
-    private float minimunSpawnInterval =1f;
-    private float intervalDecrese = 0.1f;
+    private float minimumSpawnInterval =1f;
+    private float intervalDecrease = 0.1f;
     // Start is called before the first frame update
     private void Start()
     {
@@ -27,7 +27,7 @@ public class EndlessSpawner : MonoBehaviour
             catch(Exception error)
                 {Debug.LogError(error);}
             yield return new WaitForSeconds(spawnInterval);
-            spawnInterval = MathF.Max(minimunSpawnInterval, spawnInterval = intervalDecrese);
+            spawnInterval = MathF.Max(minimumSpawnInterval, spawnInterval = intervalDecrease);
         }
     }
 }

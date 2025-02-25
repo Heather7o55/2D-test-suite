@@ -6,7 +6,6 @@ using static GunController;
 public class PlayerShooting : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public Transform firePointRotation;
     public Transform bulletSpawnPoint;
     public Animator anim;
     public int pellets = 5;
@@ -18,15 +17,16 @@ public class PlayerShooting : MonoBehaviour
     
 
     public static Gun activeGun = Gun.Pistol;
-    bool canShoot = true;
+    private GunController gun;
     void Start()
     {
+        gun = GetComponent<GunController>();
         anim = GetComponentInChildren<Animator>();
     }
     void Update()
     {
         if(UIManager.isPaused) return;
-        if(Input.GetButton("Fire1") && canShoot)
+        if(Input.GetButton("Fire1") && gun.canShoot)
             Shoot();
     }
     void Shoot()
@@ -36,40 +36,31 @@ public class PlayerShooting : MonoBehaviour
         {
             case Gun.Pistol:
                 anim.Play("MuzzleFlash");
-                CreateBullet(0f, 20f, 1, bulletSpawnPoint, firePointRotation, bulletPrefab);
+                gun.CreateBullet(0f, 20f, 1, bulletSpawnPoint, transform, bulletPrefab);
                 audioSource.clip = pistol;
-                StartCoroutine(GunCoolDown(0.3f));
+                gun.StartGunCooldown(0.3f);
                 break;
             case Gun.Rifle:
                 anim.Play("MuzzleFlash");
-                CreateBullet(0f, 25f, 1, bulletSpawnPoint, firePointRotation, bulletPrefab);
+                gun.CreateBullet(0f, 25f, 1, bulletSpawnPoint, transform, bulletPrefab);
                 audioSource.clip = rifle;
-                StartCoroutine(GunCoolDown(0.1f));
+                gun.StartGunCooldown(0.1f);
                 break;
             case Gun.Shotgun:
                 anim.Play("MuzzleFlash");
-                Shotgun(bulletSpawnPoint, firePointRotation, bulletPrefab);
+                gun.Shotgun(bulletSpawnPoint, transform, bulletPrefab, pellets);
                 audioSource.clip = shotgun;
-                StartCoroutine(GunCoolDown(0.5f));
+                gun.StartGunCooldown(0.5f);
                 break;
             case Gun.Sniper:
                 anim.Play("MuzzleFlash");
-                CreateBullet(0f, 50f, 3, bulletSpawnPoint, firePointRotation, bulletPrefab);
+                gun.CreateBullet(0f, 50f, 3, bulletSpawnPoint, transform, bulletPrefab);
                 audioSource.clip = sniper;
-                StartCoroutine(GunCoolDown(0.75f));
+                gun.StartGunCooldown(0.75f);
                 break;
         }
         audioSource.Play();
     }
    
-    void Shotgun(Transform spawnPoint, Transform rotatePoint, GameObject prefab)
-    {
-        for(int i = 0; i < pellets; i++) CreateBullet(0.35f, 10f, 1, spawnPoint, rotatePoint, prefab);
-    }
-    IEnumerator GunCoolDown(float timer)
-    {
-        canShoot = false;
-        yield return new WaitForSeconds(timer);
-        canShoot = true;
-    }
+    
 }

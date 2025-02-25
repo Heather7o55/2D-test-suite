@@ -5,6 +5,7 @@ using UnityEngine;
 Instantiate, or Destroy unless its a monobehaviour */
 public class GunController : MonoBehaviour
 {
+    public bool canShoot = true;
     public enum Gun
     {
         Pistol,
@@ -14,9 +15,8 @@ public class GunController : MonoBehaviour
     }
     /* "CreateBullet" takes in the range, aka the spread, the bullet speed, the damage,
     the spawnpoint, the rotation transform of the character its spawning from, and the bullet object it wants to spawn  */
-    public static void CreateBullet(float range, float speed, int damage, Transform spawnPoint, Transform firePointRotation, GameObject bulletPrefab)
+    public void CreateBullet(float range, float speed, int damage, Transform spawnPoint, Transform firePointRotation, GameObject bulletPrefab)
     {  
-        
         GameObject bullet = Instantiate(bulletPrefab, new Vector3(spawnPoint.position.x, 
             Random.Range(spawnPoint.position.y - range, spawnPoint.position.y + range), 
             spawnPoint.position.z), firePointRotation.rotation);
@@ -25,4 +25,19 @@ public class GunController : MonoBehaviour
         bullet.GetComponent<Bullet>().damage = damage;
         Destroy(bullet, 10f);
     }
+    public void StartGunCooldown(float timer)
+    {
+        StartCoroutine(GunCoolDown(timer));
+    }
+    public void Shotgun(Transform spawnPoint, Transform rotatePoint, GameObject prefab, int pellets)
+    {
+        for(int i = 0; i < pellets; i++) CreateBullet(0.35f, 10f, 1, spawnPoint, rotatePoint, prefab);
+    }
+    private IEnumerator GunCoolDown(float timer)
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(timer);
+        canShoot = true;
+    }
+
 }

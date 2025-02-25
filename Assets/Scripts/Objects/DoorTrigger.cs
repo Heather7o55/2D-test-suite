@@ -7,10 +7,6 @@ public class DoorTrigger : MonoBehaviour
     public GameObject hiddenDoor;
     [SerializeField] private Animator anim1 = null;
     [SerializeField] private Animator anim2 = null;
-    void Start()
-    {
-        
-    }
     void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.CompareTag("Player") || collider.CompareTag("Enemy"))
