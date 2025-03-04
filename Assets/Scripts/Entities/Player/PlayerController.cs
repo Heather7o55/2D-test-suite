@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;      
 public class PlayerController : BaseEntity
 {
     float slideCoolDown = 0.4f;
     bool isSlideCooldown = false;
-    public float slideSpeed = 500f;
-    public bool isSliding = false;
-    public float moveSpeed = 10f;
-    public float sprintModifier = 1.5f;
+    private float slideSpeed = 500f;
+    private bool isSliding = false;
+    private float moveSpeed = 10f;
+    private float sprintModifier = 1.5f;
     private CameraController cameraScript;
     private Vector2 moveDirection;
     private GameObject HUD;
     public Animator anim;
+    public SpriteRenderer[] playerSprites;
     void Start()
     {
         maxHealth = 10;
@@ -75,5 +78,21 @@ public class PlayerController : BaseEntity
         yield return new WaitForSeconds(slideCoolDown);
         isSlideCooldown = false;
     }
-    
+    IEnumerator TakeDamageFlash(SpriteRenderer sprite, int count)
+    {
+        for(int i = 0; i < count; i++)
+        {
+            sprite.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            sprite.color = Color.white;
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+    public override void OnTakeDamage()
+    {
+        for(int i =0; i <playerSprites.Length; i++)
+        {
+            StartCoroutine(TakeDamageFlash(playerSprites[i],2));
+        }
+    }
 }

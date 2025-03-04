@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5439213286462476548}
   - component: {fileID: 6803332993822324973}
   - component: {fileID: 1799807582928633235}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -109,8 +109,8 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
+    m_Bits: 8
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
@@ -174,5 +174,6 @@ MonoBehaviour:
   maxHealth: 1
   currentHealth: 1
   selfRigidBody: {fileID: 0}
+  isPlayer: 1
   damage: 1
   ricochets: 0

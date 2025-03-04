@@ -39,5 +39,4 @@ public class GunController : MonoBehaviour
         yield return new WaitForSeconds(timer);
         canShoot = true;
     }
-
 }

@@ -19,6 +19,9 @@ public class Bullet : BaseEntity
             Debug.Log("bullet destroyed");
             ModifyHealth(-1);
         }
-            
+    }
+    public override void OnTakeDamage()
+    {
+        return;
     }
 }

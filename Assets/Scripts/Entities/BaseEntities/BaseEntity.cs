@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]         
 [RequireComponent(typeof(BoxCollider2D))]  
-public class BaseEntity : MonoBehaviour
+public abstract class BaseEntity : MonoBehaviour
 {
     public int maxHealth;
     public int currentHealth;
@@ -18,6 +18,7 @@ public class BaseEntity : MonoBehaviour
     // ModifyHeath allows you to increase or decrease heath in one function by sending a positive or negative value
     public void ModifyHealth(int modifier)
     {
+        if(modifier < 0) OnTakeDamage();
         currentHealth += modifier;
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
@@ -35,4 +36,5 @@ public class BaseEntity : MonoBehaviour
         // Debug.Log(gameObject.name + " died");
         Destroy(gameObject);
     }
+    public abstract void OnTakeDamage();
 }

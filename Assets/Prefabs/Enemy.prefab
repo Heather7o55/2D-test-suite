@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46ef31610a76644d85670c22943f8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
+  maxHealth: 2
   currentHealth: 0
   selfRigidBody: {fileID: 0}
   bulletPrefab: {fileID: 2037739264088706091, guid: 7c06753209db523498dfee2c34f623c2, type: 3}

@@ -20,7 +20,6 @@ public class BasicEnemy : BaseEntity
     {
         gun = GetComponent<GunController>();
         audioSource = GetComponent<AudioSource>();
-        maxHealth = 3;
         Setup();
         tmp = transform.position;
         self = GetComponent<Renderer>();
@@ -38,13 +37,14 @@ public class BasicEnemy : BaseEntity
     void Update()
     { 
         if(!self.isVisible) return;
+        
         if(canSeePlayer)
         {
-            Vector3 direction = player.transform.position - transform.position;
+            tmp = player.transform.position;
+            Vector3 direction = tmp - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             selfRigidBody.rotation = angle;
-            tmp = player.transform.position;
-        }
+        } 
         if(canShootPlayer && gun.canShoot) Shoot();
         agent.SetDestination(tmp);
     }
@@ -53,7 +53,7 @@ public class BasicEnemy : BaseEntity
         Debug.Log("enemy shooting");
         //anim.Play("MuzzleFlash");
         gun.CreateBullet(0f, 25f, 1, bulletSpawnPoint, transform, bulletPrefab);
-        gun.StartGunCooldown(0.4f);
+        gun.StartGunCooldown(0.5f);
         audioSource.Play();
     }
     void OnTriggerStay2D(Collider2D collision)
@@ -77,5 +77,9 @@ public class BasicEnemy : BaseEntity
         canSeePlayer = true;
         yield return new WaitForSeconds(timer);
         canSeePlayer = false;
+    }
+    public override void OnTakeDamage()
+    {
+        tmp = player.transform.position;
     }
 }

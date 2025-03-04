@@ -18,7 +18,7 @@ public class ShakeTrigger : MonoBehaviour
    {
         if(col.gameObject.CompareTag("Player"))
         {
-            cameraScript.CameraShake(0.2f, 0.2f);
+            cameraScript.CameraShake(0.2f, 0.1f);
         }
    }
 }

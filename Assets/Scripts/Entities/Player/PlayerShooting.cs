@@ -14,8 +14,6 @@ public class PlayerShooting : MonoBehaviour
     public AudioClip sniper;
     public AudioClip shotgun;
     public AudioSource audioSource;
-    
-
     public static Gun activeGun = Gun.Pistol;
     private GunController gun;
     void Start()
@@ -31,7 +29,6 @@ public class PlayerShooting : MonoBehaviour
     }
     void Shoot()
     {
-       
         switch(activeGun)
         {
             case Gun.Pistol:
