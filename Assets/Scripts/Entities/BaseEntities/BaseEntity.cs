@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]  
 public abstract class BaseEntity : MonoBehaviour
 {
+    public bool player = false;
     public int maxHealth;
     public int currentHealth;
     public Rigidbody2D selfRigidBody;
@@ -33,6 +34,7 @@ public abstract class BaseEntity : MonoBehaviour
     }
     public void Die()
     {
+        if(player) UIManager.gameOver = true;
         // Debug.Log(gameObject.name + " died");
         Destroy(gameObject);
     }

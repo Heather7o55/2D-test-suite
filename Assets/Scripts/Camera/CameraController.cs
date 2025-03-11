@@ -5,12 +5,15 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     private Vector3 velocity = Vector3.zero;
+    private Vector3 basePos;
+    public GameObject parent;
     private GameObject player;
     Vector3 followTarget;
     void Start()
     {
         player = GameObject.FindWithTag("Player");
         followTarget = player.transform.localPosition;
+        basePos = transform.position;
     }
     public float smoothTime = 0.3f;
     public void CameraShake(float duration, float magnitude)
@@ -20,20 +23,16 @@ public class CameraController : MonoBehaviour
     }
     private IEnumerator Shake(float duration, float magnitude)
     {
-        Vector3 originalPos = followTarget;
         float elapsedTime = 0f;
         while(elapsedTime < duration)
         {
             float xOffset = Random.Range(-0.5f, 0.5f) * magnitude;
             float yOffset = Random.Range(-0.5f, 0.5f) * magnitude;
-            
-            transform.position = new Vector3(transform.position.x + xOffset, transform.position.y + yOffset, originalPos.z);
-
+            transform.position = new Vector3(transform.position.x + xOffset, transform.position.y + yOffset, transform.position.z);
             elapsedTime += Time.deltaTime;
-
             yield return null;
         }
-        transform.position = originalPos;
+        transform.localPosition = Vector3.zero;
     }
     public void ZoomCamera(float target, float zoomSpeed)
     {
@@ -41,6 +40,7 @@ public class CameraController : MonoBehaviour
     }
     void LateUpdate()
     {
+        updatecamera();
         // if(Input.GetKey("z"))
         // {
         //     Vector3 mousePosition = Input.mousePosition;
@@ -52,16 +52,18 @@ public class CameraController : MonoBehaviour
         // }
         // else
         // {
-        followTarget = player.transform.position;
-        followTarget.z = transform.position.z;
-        smoothTime = 0.3f;
-        // }  
-
-        UpdateCameraPosition(followTarget, smoothTime);
+        
     }
     
     private void UpdateCameraPosition(Vector3 Position, float smoothing)
     {
-        transform.position = Vector3.SmoothDamp(transform.position, Position, ref velocity, smoothing);
+        parent.transform.position = Vector3.SmoothDamp(parent.transform.position, Position, ref velocity, smoothing);
+    }
+    private void updatecamera()
+    {
+        followTarget = player.transform.position;
+        followTarget.z = parent.transform.position.z;
+        smoothTime = 0.3f; 
+        UpdateCameraPosition(followTarget, smoothTime);
     }   
 }

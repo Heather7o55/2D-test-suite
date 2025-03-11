@@ -31,7 +31,7 @@ public class GunController : MonoBehaviour
     }
     public void Shotgun(Transform spawnPoint, Transform rotatePoint, GameObject prefab, int pellets)
     {
-        for(int i = 0; i < pellets; i++) CreateBullet(0.35f, 10f, 1, spawnPoint, rotatePoint, prefab);
+        for(int i = 0; i < pellets; i++) CreateBullet(0.35f, 30f, 1, spawnPoint, rotatePoint, prefab);
     }
     private IEnumerator GunCoolDown(float timer)
     {
