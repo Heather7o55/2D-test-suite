@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
     Vector3 followTarget;
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        player = GameObject.FindWithTag("mouselook");
         followTarget = player.transform.localPosition;
         basePos = transform.position;
     }
@@ -41,18 +41,6 @@ public class CameraController : MonoBehaviour
     void LateUpdate()
     {
         updatecamera();
-        // if(Input.GetKey("z"))
-        // {
-        //     Vector3 mousePosition = Input.mousePosition;
-        //     mousePosition = cameraSettings.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 10));
-        //     followTarget = (mousePosition * 0.8f);
-        //     followTarget += player.transform.position;
-        //     followTarget.z = transform.position.z;
-        //     smoothTime = 0.0f;
-        // }
-        // else
-        // {
-        
     }
     
     private void UpdateCameraPosition(Vector3 Position, float smoothing)
