@@ -14,7 +14,7 @@ public class PlayerShooting : MonoBehaviour
     public AudioClip sniper;
     public AudioClip shotgun;
     public AudioSource audioSource;
-    public static Gun activeGun = Gun.Pistol;
+    public static Gun activeGun = Gun.Shotgun;
     private CameraController cameraController;
     private GunController gun;
     void Start()

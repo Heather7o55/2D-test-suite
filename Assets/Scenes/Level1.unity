@@ -904,6 +904,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rifle (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4137964228769463235, guid: 08e55e4329bdcf443ab721813cec56c0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6217157889128249295, guid: 08e55e4329bdcf443ab721813cec56c0, type: 3}
       propertyPath: localGun
       value: 0
@@ -2568,6 +2572,10 @@ PrefabInstance:
     - target: {fileID: 4137964228769463235, guid: 08e55e4329bdcf443ab721813cec56c0, type: 3}
       propertyPath: m_Name
       value: Rifle (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137964228769463235, guid: 08e55e4329bdcf443ab721813cec56c0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6217157889128249295, guid: 08e55e4329bdcf443ab721813cec56c0, type: 3}
       propertyPath: localGun
@@ -12090,6 +12098,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rifle (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4137964228769463235, guid: 08e55e4329bdcf443ab721813cec56c0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8864298633246780711, guid: 08e55e4329bdcf443ab721813cec56c0, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -12251,6 +12263,10 @@ PrefabInstance:
     - target: {fileID: 4137964228769463235, guid: 08e55e4329bdcf443ab721813cec56c0, type: 3}
       propertyPath: m_Name
       value: Rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137964228769463235, guid: 08e55e4329bdcf443ab721813cec56c0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6217157889128249295, guid: 08e55e4329bdcf443ab721813cec56c0, type: 3}
       propertyPath: localGun

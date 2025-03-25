@@ -42,20 +42,20 @@ public class PlayerController : BaseEntity
         moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         moveDirection.Normalize();
         if((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.Space)) && !isSliding && !isSlideCooldown)
-            slide();
+            Slide();
         else if(Input.GetKey(KeyCode.LeftShift) && !isSliding)
             selfRigidBody.velocity = moveDirection * moveSpeed * sprintModifier;
         else if(!isSliding)
             selfRigidBody.velocity = moveDirection * moveSpeed;
     }
     
-    private void slide()
+    private void Slide()
     {
         isSlideCooldown = true;
         isSliding = true;
         moveDirection.Normalize();
         selfRigidBody.AddForce(moveDirection * slideSpeed);
-        StartCoroutine("stopSlide");
+        StartCoroutine(StopSlide());
     }
     private void UpdateCamera()
     {
@@ -66,13 +66,13 @@ public class PlayerController : BaseEntity
         else 
             cameraScript.ZoomCamera(64f, 15f);
     }
-    IEnumerator stopSlide()
+    IEnumerator StopSlide()
     {
         yield return new WaitForSeconds(slideCoolDown);
         isSliding = false;
-        StartCoroutine("startCooldown");
+        StartCoroutine(StartCooldown());
     }
-    IEnumerator startCooldown()
+    IEnumerator StartCooldown()
     {
         Debug.Log("cooldown on");
         yield return new WaitForSeconds(slideCoolDown);

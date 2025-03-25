@@ -22,7 +22,8 @@ public class UIManager : MonoBehaviour
         {
             if(isPaused) ResumeGame();
             else PauseGame();
-        }
+        } 
+        Cursor.visible = isPaused;
     }
     public void ResumeGame()
     {
