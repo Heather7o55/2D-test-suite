@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("mouselook");
-        followTarget = player.transform.localPosition;
+        if(player != null)followTarget = player.transform.localPosition;
         basePos = transform.position;
     }
     public float smoothTime = 0.3f;
@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
     }
     void LateUpdate()
     {
-        updatecamera();
+        if(player != null)updatecamera();
     }
     
     private void UpdateCameraPosition(Vector3 Position, float smoothing)

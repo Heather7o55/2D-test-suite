@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
 {
     public GameObject pauseMenuUI;
     public GameObject gameOverUI;
+    public GameObject secretMenu;
+    public GameObject winUI;
     public static bool gameOver = false;
     public static bool isPaused = false;
     void Awake()
@@ -23,7 +25,10 @@ public class UIManager : MonoBehaviour
             if(isPaused) ResumeGame();
             else PauseGame();
         } 
-        Cursor.visible = isPaused;
+        if(SceneManager.GetActiveScene().name != "MainMenu" || !winUI.activeInHierarchy)
+            Cursor.visible = isPaused;
+        else
+            Cursor.visible = true;
     }
     public void ResumeGame()
     {
@@ -51,5 +56,13 @@ public class UIManager : MonoBehaviour
     {
         gameOverUI.SetActive(true);
         isPaused = true;
+    }
+    public void SecretMenu()
+    {
+        secretMenu.SetActive(true);
+    }
+    public void Win()
+    {
+        winUI.SetActive(true);
     }
 }

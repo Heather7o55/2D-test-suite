@@ -175,6 +175,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6213311981697993526, guid: 577a2942fec15fc4f84ca697153fb4cf, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213311981697993526, guid: 577a2942fec15fc4f84ca697153fb4cf, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7081534556888328254, guid: 577a2942fec15fc4f84ca697153fb4cf, type: 3}
       propertyPath: m_Name
       value: Player
@@ -12159,6 +12167,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1427169672134264992, guid: a6686ef1809b9c742bfb6d6d29b01373, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1520805529722982486, guid: a6686ef1809b9c742bfb6d6d29b01373, type: 3}
       propertyPath: m_Name
       value: Canvas
